@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <windows.h>
 
 void stringsort(std::vector<int>& mass, std::string& instring)
 {
@@ -12,6 +13,12 @@ void stringsort(std::vector<int>& mass, std::string& instring)
 		if (instring[i] >= 48 && instring[i] <= 57)
 		{
 			buff += std::to_string(instring[i]-'0');
+
+			if (i == instring.size() - 1)
+			{
+				mass.push_back(stoi(buff));
+				buff.clear();
+			}
 		}
 		else
 		{
@@ -38,8 +45,12 @@ void massprint(std::vector<int>& mass, std::ofstream& file)
 	file << "]";
 }
 
+
 int main()
 {
+	std::setlocale(LC_ALL, "Russian");
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
 	std::vector<int> numbers;
 	std::ifstream infile("E:\\VSProjects\\MP_LR_4\\input.txt");
 	std::ofstream outfile("E:\\VSProjects\\MP_LR_4\\output.txt");
